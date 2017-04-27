@@ -1,24 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome to the Todo List Manager</title>
-</head>
-<body>
-    <h1>Welcome to the Todo List Manager</h1>
-    <p>Here you can see all existing tasks</p>
-    <ul>
-        {% for task in tasks_list %}
-            <li>{{ task[1] }} <a href="{{ url_for('delete_task',id_task=task[0]) }}">Delete</a></li>
-        {% endfor %}
-    </ul>
+{% extends "bootstrap/base.html" %}
+{% block title %}Welcome to the Todo List Manager{% endblock %}
 
-    <form action="{{ url_for('insert_task') }}" method="post">
-        <p>
-            Insert a new task:  <input type="text" name="description">
-            <input type="submit" value="Enter">
-        </p>
-    </form>
+{% block content %}
+    <div class="container">
+        <h1>Welcome to the Todo List Manager</h1>
+        <p>Here you can see all existing tasks</p>
+        <ul>
+            {% for task in tasks_list %}
+                <li>{{ task[1] }} <a href="{{ url_for('delete_task',id_task=task[0]) }}">Delete</a></li>
+            {% endfor %}
+        </ul>
 
-</body>
-</html>
+        <form action="{{ url_for('insert_task') }}" method="post">
+            <div class="form-group">
+                <label>Insert a new task</label>
+                <input class="form-control" type="text" name="description" onfocus="focus()">
+            </div>
+            <input class="btn btn-default" type="submit" value="Enter">
+
+        </form>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script type="application/javascript" src="{{ url_for('static', filename='extra.js') }}"></script>
+{% endblock %}

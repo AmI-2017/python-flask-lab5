@@ -18,9 +18,11 @@ limitations under the License
 
 from flask import Flask, url_for, render_template, request, redirect
 import db_interaction
+from flask_bootstrap import Bootstrap
 
 
 app = Flask(__name__)
+Bootstrap(app)
 
 @app.route('/')
 def hello_world():
