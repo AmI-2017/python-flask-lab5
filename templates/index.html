@@ -5,18 +5,22 @@
     <div class="container">
         <h1>Welcome to the Todo List Manager</h1>
         <p>Here you can see all existing tasks</p>
-        <ul>
+        <ul class="list-group">
             {% for task in tasks_list %}
-                <li>{{ task[1] }} <a href="{{ url_for('delete_task',id_task=task[0]) }}">Delete</a></li>
+                <li class="list-group-item">{{ task[1] }}
+                    <a href="{{ url_for('delete_task',id_task=task[0]) }}">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                    <a href="#" onclick="copydown(this)"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a>
+                </li>
             {% endfor %}
         </ul>
 
         <form action="{{ url_for('insert_task') }}" method="post">
             <div class="form-group">
                 <label>Insert a new task</label>
-                <input class="form-control" type="text" name="description" onfocus="focus()">
+                <input class="form-control" type="text" id="inputdescription" name="description" onfocus="myfocus()">
             </div>
-            <input class="btn btn-default" type="submit" value="Enter">
+            <input id="submitbutton" class="btn btn-default" type="submit" value="Enter" disabled="disabled">
 
         </form>
     </div>
